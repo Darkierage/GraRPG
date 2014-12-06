@@ -17,5 +17,6 @@ public class Main
     {
 	Game newGame = new Game();
 	newGame.startGame();
+        //test
     }
 }
