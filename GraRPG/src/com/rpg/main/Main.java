@@ -5,6 +5,8 @@
 
 package com.rpg.main;
 
+import com.rpg.game.Game;
+
 /**
  *
  * @author Konrad
@@ -13,6 +15,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-	
+	Game newGame = new Game();
+	newGame.startGame();
     }
 }

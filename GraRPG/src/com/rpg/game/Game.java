@@ -4,6 +4,8 @@
  */
 package com.rpg.game;
 
+import com.rpg.draws.Draw;
+import com.rpg.draws.Write;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.lwjgl.LWJGLException;
@@ -19,6 +21,13 @@ import static org.lwjgl.opengl.GL11.*;
 public class Game
 {
 
+    /**
+     * Uruchamia gre:
+     * inicjalizuje wyświetlanie
+     * inicjalizuje openGL'a
+     * uruchamia główną pętlę gry
+     * sprząta po zakończeniu
+     */
     public void startGame()
     {
 	initDisplay(1280, 720);
@@ -28,7 +37,7 @@ public class Game
     }
 
     /**
-     * This function creates display withe seted resolution.
+     * Uruchmia możliwość wyświetlania oraz ustawia rozdzielczość okna
      *
      * @param width DisplayMode width
      * @param height DisplayMode height
@@ -46,7 +55,7 @@ public class Game
     }
 
     /**
-     * Initialzes matrix modes
+     * Inicjalizuje openGL'a
      */
     private void initGL()
     {
@@ -59,7 +68,7 @@ public class Game
     }
 
     /**
-     * Cleaning up matrixes
+     * Sprzątanie
      */
     private void cleanUp()
     {
@@ -68,9 +77,10 @@ public class Game
 
     private void mainLoop()
     {
-	while (Display.isCloseRequested())
+	while (!Display.isCloseRequested())
 	{
 	    glClear(GL_COLOR_BUFFER_BIT);
+	    Write.drawString("Konrad", 10, 10, 100);
 	    Display.update();
 	}
     }
