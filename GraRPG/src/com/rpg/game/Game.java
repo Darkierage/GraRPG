@@ -5,10 +5,16 @@
 package com.rpg.game;
 
 import com.rpg.draws.Draw;
+import com.rpg.draws.Texture;
 import com.rpg.draws.Write;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import static org.lwjgl.opengl.GL11.*;
@@ -48,6 +54,8 @@ public class Game
 	{
 	    Display.setDisplayMode(new DisplayMode(width, height));
 	    Display.create();
+	    Display.setVSyncEnabled(true);
+	    Keyboard.create();
 	} catch (LWJGLException ex)
 	{
 	    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
@@ -73,14 +81,28 @@ public class Game
     private void cleanUp()
     {
 	Display.destroy();
+	Keyboard.destroy();
     }
 
     private void mainLoop()
     {
 	while (!Display.isCloseRequested())
 	{
+	    URL url = null;
+	    Texture tex = null;
 	    glClear(GL_COLOR_BUFFER_BIT);
-	    Write.drawString("Konrad", 10, 10, 100);
+	    try 
+	    {
+		url = new File("Grass.png").toURI().toURL();
+		tex = new Texture(url);
+	    } catch (MalformedURLException ex)
+	    {
+		Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+	    } catch (IOException ex)
+	    {
+		Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+	    }
+	    Draw.rect(100, 100, 100, 100, tex);
 	    Display.update();
 	}
     }
