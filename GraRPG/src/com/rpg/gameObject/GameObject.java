@@ -16,6 +16,14 @@ public abstract class GameObject
     protected float y;
     protected float sx;
     protected float sy;
+
+    public GameObject(float x, float y, float sx, float sy)
+    {
+	this.x = x;
+	this.y = y;
+	this.sx = sx;
+	this.sy = sy;
+    }
     
     public abstract void update();
 

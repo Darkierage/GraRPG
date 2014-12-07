@@ -12,6 +12,11 @@ package com.rpg.gameObject;
 public class GOPlayer extends GameObject
 {
 
+    public GOPlayer(float x, float y, float sx, float sy)
+    {
+	super(x, y, sx, sy);
+    }
+
     @Override
     public void update()
     {

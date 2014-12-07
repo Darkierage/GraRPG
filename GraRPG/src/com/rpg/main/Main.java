@@ -16,9 +16,9 @@ public class Main
 {
     public static void main(String[] args)
     {
-	//Game newGame = new Game();
-	//newGame.startGame();
+	Game newGame = new Game();
+	newGame.startGame();
         //test
-        MainWindow newMainWindow = new MainWindow();
+        //MainWindow newMainWindow = new MainWindow();
     }
 }

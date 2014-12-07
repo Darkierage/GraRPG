@@ -26,6 +26,12 @@ import static org.lwjgl.opengl.GL11.*;
  */
 public class Game
 {
+    GameLogic game;
+
+    public Game()
+    {
+	this.game = new GameLogic();
+    }
 
     /**
      * Uruchamia gre:
@@ -88,21 +94,8 @@ public class Game
     {
 	while (!Display.isCloseRequested())
 	{
-	    URL url = null;
-	    Texture tex = null;
-	    glClear(GL_COLOR_BUFFER_BIT);
-	    try 
-	    {
-		url = new File("Grass.png").toURI().toURL();
-		tex = new Texture(url);
-	    } catch (MalformedURLException ex)
-	    {
-		Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-	    } catch (IOException ex)
-	    {
-		Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-	    }
-	    Draw.rect(100, 100, 100, 100, tex);
+	    game.update();
+	    game.render();
 	    Display.update();
 	}
     }

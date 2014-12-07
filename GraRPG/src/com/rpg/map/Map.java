@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
  *
  * @author Konrad
  */
-public class Map
+public class Map 
 {
 
     private final File MAP;
@@ -53,7 +53,7 @@ public class Map
 	int[][] pixelTable = new int[mapImage.getHeight()][mapImage.getWidth()];
 	for (int i = 0; i < mapImage.getHeight(); i++)
 	{
-	    for (int j = 0; j < mapImage.getWidth(); i++)
+	    for (int j = 0; j < mapImage.getWidth(); j++)
 	    {
 		if (pixelColors[i * mapImage.getWidth() + j].getRed() == 255
 			&& pixelColors[i * mapImage.getWidth() + j].getBlue() == 0
