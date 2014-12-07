@@ -11,6 +11,12 @@ package com.rpg.game;
  */
 public class GameLogic
 {
+
+    public GameLogic()
+    {
+	
+    }
+    
     private void update()
     {
 	
