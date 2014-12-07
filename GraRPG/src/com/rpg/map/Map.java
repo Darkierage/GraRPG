@@ -47,8 +47,9 @@ public class Map
 	}
     }
 
-    private int[][] getColorCodes()
+    public int[][] getColorCodes()
     {
+	this.getPixels();
 	int[][] pixelTable = new int[mapImage.getHeight()][mapImage.getWidth()];
 	for (int i = 0; i < mapImage.getHeight(); i++)
 	{
@@ -64,6 +65,11 @@ public class Map
 			&& pixelColors[i * mapImage.getWidth() + j].getGreen() == 0)
 		{
 		    pixelTable[i][j] = 2;
+		} else if (pixelColors[i * mapImage.getWidth() + j].getRed() == 0
+			&& pixelColors[i * mapImage.getWidth() + j].getBlue() == 255
+			&& pixelColors[i * mapImage.getWidth() + j].getGreen() == 0)
+		{
+		    pixelTable[i][j] = 3;
 		}
 	    }
 	}

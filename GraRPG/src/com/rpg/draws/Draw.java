@@ -56,6 +56,48 @@ public class Draw
         glPopMatrix();
     }
     
+    /**
+     * Rysowanie prostokąta z możliwością obrotu
+     * @param x przesunięcie wzdłuż osi X
+     * @param y przesunięcie wzdłuż osi Y
+     * @param width szerokość prostokąta
+     * @param high wysokość prostokąta
+     * @param rotation obrót w stopniach
+     * @param tex tekstura obiektu
+     */
+    public static void rect(float x, float y, float width, float high, Texture tex)
+    {
+        //Wrzucamy macierz na stos. Transformując macierz, działamy cały czas na jednej macierzy. Dzięki tej operacji nie będziemy przesuwać wszystkich kwadratów tylko jeden
+        glPushMatrix(); 
+        {
+            //Przesunięcie obiektu wzdłuz osi XYZ
+            glTranslatef(x, y, 0);
+            //glRotatef(rotation, 0, 0, 1);
+	    glEnable(GL_TEXTURE_2D);
+	    
+	    tex.bind();
+	    float u = 0f;
+	    float v = 0f;
+	    float u2 = 1f;
+	    float v2 = 1f;
+            //Wszystko w OpenGL'u rysujemy między glBegin() a glEnd(). GL_QUADS - czworoboki 
+            glBegin(GL_QUADS); 
+            {
+                glTexCoord2f(u, v);
+		glVertex2f(0, 0);
+		glTexCoord2f(u, v2);
+                glVertex2f(0, high);
+		glTexCoord2f(u2, v2);
+                glVertex2f(width, high);
+		glTexCoord2f(u2, v);
+                glVertex2f(width, 0) ;
+            }
+            glEnd();
+        }
+        //Zdjęcie ze stosu
+        glPopMatrix();
+    }
+    
     public static void circle(float x, float y, float r)
     {
         //Wrzucamy macierz na stos. Transformując macierz, działamy cały czas na jednej macierzy. Dzięki tej operacji nie będziemy przesuwać wszystkich kwadratów tylko jeden
