@@ -4,21 +4,12 @@
  */
 package com.rpg.game;
 
-import com.rpg.draws.Draw;
 import com.rpg.draws.Render;
-import com.rpg.draws.Texture;
+import com.rpg.gameObject.GOPlayer;
 import com.rpg.gameObject.GOTerrain;
-import com.rpg.gameObject.GameObject;
 import com.rpg.map.Map;
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11.glClear;
+import org.lwjgl.input.Keyboard;
 
 /**
  *
@@ -29,10 +20,14 @@ public class GameLogic
 
     private final int[][] colorCode;
     ArrayList<GOTerrain> terrain;
+    GOPlayer player;
+    Render renderer;
 
     public GameLogic()
     {
 	Map map = new Map();
+	renderer = new Render();
+	renderer.zrobilemFunkcjeBoNieChceMiSieMyslecJakZaladowacObrazki();
 	colorCode = map.getColorCodes();
 	terrain = new ArrayList<>();
 	createObjects();
@@ -57,8 +52,13 @@ public class GameLogic
 	    {
 		if(colorCode[i][j] == 2)
 		    terrain.add(new GOTerrain(true, posx, posy, 40, 40));
-		else
+		else if(colorCode[i][j] == 1)
 		    terrain.add(new GOTerrain(false, posx, posy, 40, 40));
+		else if(colorCode[i][j] == 3)
+		{
+		    player = new GOPlayer(posx, posy, 40, 40);
+		    terrain.add(new GOTerrain(true, posx, posy, 40, 40));
+		}
 		posx += 40;
 	    }
 	    posy +=40;
@@ -69,6 +69,19 @@ public class GameLogic
 
     void render()
     {
-	Render.renderTerrain(terrain);
+	renderer.renderTerrain(terrain);
+	renderer.renderPlayer(player);
+    }
+
+    void getInput()
+    {
+	if(Keyboard.isKeyDown(Keyboard.KEY_W))
+	    player.moveY(-1);
+	else if(Keyboard.isKeyDown(Keyboard.KEY_S))
+	    player.moveY(1);
+	else if(Keyboard.isKeyDown(Keyboard.KEY_D))
+	    player.moveX(1);
+	else if(Keyboard.isKeyDown(Keyboard.KEY_A))
+	    player.moveX(-1);
     }
 }

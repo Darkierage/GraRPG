@@ -5,6 +5,7 @@
 package com.rpg.game;
 
 import com.rpg.draws.Draw;
+import com.rpg.draws.Render;
 import com.rpg.draws.Texture;
 import com.rpg.draws.Write;
 import java.io.File;
@@ -17,6 +18,7 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.GL11;
 import static org.lwjgl.opengl.GL11.*;
 
 /**
@@ -73,12 +75,33 @@ public class Game
      */
     private void initGL()
     {
-	glMatrixMode(GL_PROJECTION);
+	/*	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(0, Display.getWidth(), 0, Display.getHeight(), -1, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glDisable(GL_DEPTH_TEST);
-	glClearColor(0, 0, 0, 1);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(0.6f, 0.6f, 0.6f, 1f);
+	GL11.glEnable(GL11.GL_TEXTURE_2D);
+	GL11.glEnable(GL11.GL_BLEND);
+	GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);*/
+	 
+        GL11.glEnable(GL11.GL_TEXTURE_2D);               
+         
+        GL11.glClearColor(1.0f, 0.0f, 0.0f, 0.0f);          
+         
+            // enable alpha blending
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+         
+            GL11.glViewport(0,0,1280, 720);
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+ 
+        GL11.glMatrixMode(GL11.GL_PROJECTION);
+        GL11.glLoadIdentity();
+        GL11.glOrtho(0, 1280, 720, 0, 1, -1);
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+	
     }
 
     /**
@@ -96,6 +119,7 @@ public class Game
 	{
 	    game.update();
 	    game.render();
+	    game.getInput();
 	    Display.update();
 	}
     }
