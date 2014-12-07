@@ -4,21 +4,30 @@
  */
 package com.rpg.windows;
 
+import com.rpg.date.AccountManagment;
+import com.rpg.date.User;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 
 /**
  *
  * @author Darkrage
  */
-public class Frame extends javax.swing.JFrame {
+public class MainWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form Frame
      */
-    public Frame() {
-        setLocationRelativeTo(null);
+
+    AccountManagment newAM = new AccountManagment();
+    
+    public MainWindow() {
         setUndecorated(true);
+        setVisible(true);
         initComponents();
+        setLocationRelativeTo(null);
+              
         
     }
 
@@ -31,13 +40,13 @@ public class Frame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        MainPanel = new javax.swing.JPanel();
-        welcomePanel = new javax.swing.JPanel();
+        MainPanel = new com.rpg.windows.ImagePanel(new ImageIcon("src/com/rpg/windows/background_main.jpg").getImage());
+        welcomePanel = new com.rpg.windows.ImagePanel(new ImageIcon("src/com/rpg/windows/background_main.jpg").getImage());
         welcomeLabel = new javax.swing.JLabel();
         logButton = new javax.swing.JButton();
         registerButton = new javax.swing.JButton();
         footerLabel = new javax.swing.JLabel();
-        registerPanel = new javax.swing.JPanel();
+        registerPanel = new com.rpg.windows.ImagePanel(new ImageIcon("src/com/rpg/windows/background_main.jpg").getImage());
         registerLabel = new javax.swing.JLabel();
         loginLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
@@ -47,7 +56,7 @@ public class Frame extends javax.swing.JFrame {
         loginRegTextField = new javax.swing.JTextField();
         passwordRegPassField = new javax.swing.JPasswordField();
         repassRegPassField = new javax.swing.JPasswordField();
-        logPanel = new javax.swing.JPanel();
+        logPanel = new com.rpg.windows.ImagePanel(new ImageIcon("src/com/rpg/windows/background_main.jpg").getImage());
         loginTitleLogLabel = new javax.swing.JLabel();
         loginLogLabel = new javax.swing.JLabel();
         passwordLogLabel = new javax.swing.JLabel();
@@ -55,7 +64,7 @@ public class Frame extends javax.swing.JFrame {
         passwordLogPassField = new javax.swing.JPasswordField();
         acceptLogButton = new javax.swing.JButton();
         cancelLogButton = new javax.swing.JButton();
-        accountPanel = new javax.swing.JPanel();
+        accountPanel = new com.rpg.windows.ImagePanel(new ImageIcon("src/com/rpg/windows/background_main.jpg").getImage());
         accountTitleLabel = new javax.swing.JLabel();
         logingetAccLabel = new javax.swing.JLabel();
         logoutAccButton = new javax.swing.JButton();
@@ -72,8 +81,8 @@ public class Frame extends javax.swing.JFrame {
         closeMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
 
+        MainPanel.setMaximumSize(new java.awt.Dimension(0, 0));
         MainPanel.setPreferredSize(new java.awt.Dimension(860, 500));
         MainPanel.setLayout(null);
 
@@ -115,8 +124,9 @@ public class Frame extends javax.swing.JFrame {
                 .addComponent(welcomeLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, welcomePanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(footerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(footerLabel)
+                .addContainerGap())
         );
         welcomePanelLayout.setVerticalGroup(
             welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,14 +140,14 @@ public class Frame extends javax.swing.JFrame {
                     .addGroup(welcomePanelLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(logButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(148, 148, 148)
-                .addComponent(footerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(137, 137, 137)
+                .addComponent(footerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         MainPanel.add(welcomePanel);
         welcomePanel.setBounds(0, 0, 860, 500);
 
-        registerPanel.setEnabled(false);
         registerPanel.setPreferredSize(new java.awt.Dimension(860, 500));
 
         registerLabel.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
@@ -154,9 +164,19 @@ public class Frame extends javax.swing.JFrame {
 
         acceptRegButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         acceptRegButton.setText("Accept");
+        acceptRegButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acceptRegButtonActionPerformed(evt);
+            }
+        });
 
         cancelRegButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         cancelRegButton.setText("Cancel");
+        cancelRegButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelRegButtonActionPerformed(evt);
+            }
+        });
 
         loginRegTextField.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         loginRegTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -232,10 +252,13 @@ public class Frame extends javax.swing.JFrame {
                 .addGap(28, 28, 28))
         );
 
+        registerPanel.setVisible(false);
+
         MainPanel.add(registerPanel);
         registerPanel.setBounds(0, 0, 860, 500);
 
-        logPanel.setEnabled(false);
+        logPanel.setMaximumSize(new java.awt.Dimension(0, 0));
+        logPanel.setPreferredSize(new java.awt.Dimension(860, 500));
 
         loginTitleLogLabel.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         loginTitleLogLabel.setText("Log in");
@@ -255,9 +278,19 @@ public class Frame extends javax.swing.JFrame {
         acceptLogButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         acceptLogButton.setText("Accept");
         acceptLogButton.setPreferredSize(new java.awt.Dimension(103, 37));
+        acceptLogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acceptLogButtonActionPerformed(evt);
+            }
+        });
 
         cancelLogButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         cancelLogButton.setText("Cancel");
+        cancelLogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelLogButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout logPanelLayout = new javax.swing.GroupLayout(logPanel);
         logPanel.setLayout(logPanelLayout);
@@ -281,7 +314,7 @@ public class Frame extends javax.swing.JFrame {
             .addGroup(logPanelLayout.createSequentialGroup()
                 .addGap(180, 180, 180)
                 .addComponent(acceptLogButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
                 .addComponent(cancelLogButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(180, 180, 180))
         );
@@ -305,18 +338,17 @@ public class Frame extends javax.swing.JFrame {
                 .addGap(35, 35, 35))
         );
 
-        MainPanel.add(logPanel);
-        logPanel.setBounds(-32768, -32768, 100, 100);
+        logPanel.setVisible(false);
 
-        accountPanel.setEnabled(false);
+        MainPanel.add(logPanel);
+        logPanel.setBounds(0, 0, 860, 500);
 
         accountTitleLabel.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         accountTitleLabel.setText("Account");
 
         logingetAccLabel.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        logingetAccLabel.setText("Login");
 
-        logoutAccButton.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        logoutAccButton.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         logoutAccButton.setText("Logout");
         logoutAccButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -373,8 +405,8 @@ public class Frame extends javax.swing.JFrame {
             .addGroup(accountPanelLayout.createSequentialGroup()
                 .addGap(345, 345, 345)
                 .addComponent(accountTitleLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(logingetAccLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addComponent(logingetAccLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(logoutAccButton)
                 .addGap(40, 40, 40))
@@ -382,18 +414,16 @@ public class Frame extends javax.swing.JFrame {
                 .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(accountPanelLayout.createSequentialGroup()
                         .addGap(70, 70, 70)
-                        .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(avaibleAccLabel)
-                            .addGroup(accountPanelLayout.createSequentialGroup()
-                                .addComponent(characterAccList, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(lastAccList, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(125, 125, 125))
+                        .addComponent(characterAccList, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(lastAccList, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(accountPanelLayout.createSequentialGroup()
                         .addGap(99, 99, 99)
-                        .addComponent(startAccButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(startAccButton))
+                    .addGroup(accountPanelLayout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(avaibleAccLabel)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(deleteAccAccButton)
                     .addComponent(createAccButton)
@@ -408,20 +438,20 @@ public class Frame extends javax.swing.JFrame {
                     .addGroup(accountPanelLayout.createSequentialGroup()
                         .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(logingetAccLabel)
+                                .addComponent(logingetAccLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(logoutAccButton))
                             .addComponent(accountTitleLabel))
                         .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(accountPanelLayout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(avaibleAccLabel))
-                            .addGroup(accountPanelLayout.createSequentialGroup()
                                 .addGap(55, 55, 55)
-                                .addComponent(createAccButton)))
-                        .addGap(12, 12, 12)
-                        .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(characterAccList, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                            .addComponent(lastAccList, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                                .addComponent(createAccButton)
+                                .addGap(12, 12, 12)
+                                .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(characterAccList, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                                    .addComponent(lastAccList, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                            .addGroup(accountPanelLayout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(avaibleAccLabel))))
                     .addComponent(deleteCharAccButton))
                 .addGap(83, 83, 83)
                 .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -430,11 +460,10 @@ public class Frame extends javax.swing.JFrame {
                 .addContainerGap(89, Short.MAX_VALUE))
         );
 
+        accountPanel.setVisible(false);
+
         MainPanel.add(accountPanel);
         accountPanel.setBounds(0, 0, 860, 500);
-
-        getContentPane().add(MainPanel);
-        MainPanel.setBounds(-32768, -32768, 100, 100);
 
         jMenuBar.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -449,15 +478,28 @@ public class Frame extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar);
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(MainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(MainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void logButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logButtonActionPerformed
-        // TODO add your handling code here:
+        welcomePanel.setVisible(false);
+        logPanel.setVisible(true);
     }//GEN-LAST:event_logButtonActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
-        // TODO add your handling code here:
+        welcomePanel.setVisible(false);
+        registerPanel.setVisible(true);
     }//GEN-LAST:event_registerButtonActionPerformed
 
     private void loginRegTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginRegTextFieldActionPerformed
@@ -484,41 +526,68 @@ public class Frame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_logoutAccButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+    private void cancelLogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelLogButtonActionPerformed
+        loginLogTextField.setText(null);
+        passwordLogPassField.setText(null);
+        logPanel.setVisible(false);
+        welcomePanel.setVisible(true);
+    }//GEN-LAST:event_cancelLogButtonActionPerformed
+
+    private void acceptRegButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptRegButtonActionPerformed
+        if(passwordRegPassField.getText().equals(repassRegPassField.getText()))
+        {       
+            AccountManagment newAMLocal = new AccountManagment(new User(loginRegTextField.getText().toString(), passwordRegPassField.getText().toString()));       
+            if(newAMLocal.RegisterAccount() == false)
+            {
+                JOptionPane.showMessageDialog(null, "Account already exists!");
+                loginRegTextField.setText(null);
+                passwordRegPassField.setText(null);
+                repassRegPassField.setText(null);
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            else
+            {
+                //newAM = newAMLocal;
+                registerPanel.setVisible(false);
+                accountPanel.setVisible(true);          
+            }
         }
-        //</editor-fold>
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Passwords are not the same!");
+            loginRegTextField.setText(null);
+            passwordRegPassField.setText(null);
+            repassRegPassField.setText(null);
+        }       
+    }//GEN-LAST:event_acceptRegButtonActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Frame().setVisible(true);
-            }
-        });
-    }
+    private void cancelRegButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelRegButtonActionPerformed
+        loginRegTextField.setText(null);
+        passwordRegPassField.setText(null);
+        repassRegPassField.setText(null);
+        registerPanel.setVisible(false);
+        welcomePanel.setVisible(true);
+    }//GEN-LAST:event_cancelRegButtonActionPerformed
 
+    private void acceptLogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptLogButtonActionPerformed
+        AccountManagment newAMLocal = new AccountManagment(new User(loginLogTextField.getText().toString(), passwordLogPassField.getText().toString()));
+        if(newAMLocal.LogIn() == false)
+        {
+            JOptionPane.showMessageDialog(null, "Account does not exist or password does not match!");
+            loginLogTextField.setText(null);
+            passwordLogPassField.setText(null);          
+        }
+        else
+        {
+            newAM = newAMLocal;           
+            logPanel.setVisible(false);
+            logingetAccLabel.setText("Logged as: " + loginLogTextField.getText().toString());
+            accountPanel.setVisible(true);
+            
+        }
+        
+    }//GEN-LAST:event_acceptLogButtonActionPerformed
+
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MainPanel;
     private javax.swing.JButton acceptLogButton;

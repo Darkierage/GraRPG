@@ -6,6 +6,7 @@
 package com.rpg.main;
 
 import com.rpg.game.Game;
+import com.rpg.windows.MainWindow;
 
 /**
  *
@@ -15,8 +16,9 @@ public class Main
 {
     public static void main(String[] args)
     {
-	Game newGame = new Game();
-	newGame.startGame();
+	//Game newGame = new Game();
+	//newGame.startGame();
         //test
+        MainWindow newMainWindow = new MainWindow();
     }
 }
