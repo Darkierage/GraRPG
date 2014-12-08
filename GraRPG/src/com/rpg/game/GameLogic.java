@@ -5,11 +5,13 @@
 package com.rpg.game;
 
 import com.rpg.draws.Render;
+import com.rpg.gameObject.GOMonster;
 import com.rpg.gameObject.GOPlayer;
 import com.rpg.gameObject.GOProjectile;
 import com.rpg.gameObject.GOTerrain;
 import com.rpg.gameObject.GameObject;
 import com.rpg.map.Map;
+import com.rpg.physics.Collision;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.logging.Level;
@@ -33,6 +35,8 @@ public class GameLogic
     Render renderer;
     Thread t1;
     GOProjectile spell = null;
+    ArrayList<GOMonster> monster = new ArrayList<>();
+    private boolean ended = false;
 
     public GameLogic()
     {
@@ -64,11 +68,35 @@ public class GameLogic
 	if (spell != null)
 	{
 	    if (spell.isExists())
+	    {
 		spell.update();
+		ArrayList<GOMonster> toRemove = new ArrayList<>();
+		for(GOMonster m : monster)
+		{
+		    if (Collision.checkIntersection(spell, m))
+		    {
+			m.setAlive(false);
+			spell = null;
+			toRemove.add(m);
+			objects.add(new GOTerrain(1, 1, m.getX(), m.getY(), 7));
+		    }
+		}
+		for (int i=0; i<toRemove.size(); i++)
+		{
+		    objects.remove(toRemove.get(0));
+		    monster.remove(toRemove.get(0));
+		}
+	    }
 	    else
 		spell = null;
 	}
-	    
+	for (GOMonster m : monster)
+	{
+	    m.update();
+	    if (m.getX() - player.getX() < 2 && m.getY() - player.getY() < 2)
+		ended = true;
+	}
+	
     }
 
     private boolean createObjects()
@@ -96,6 +124,10 @@ public class GameLogic
 		{
 		    player = new GOPlayer(posx, posy, 40, 40, walls, 2);
 		    //terrain.add(new GOTerrain(true, posx, posy, 40, 40));
+		} else if (colorCode[i][j] == 4)
+		{
+		    GOMonster m = new GOMonster(posx, posy, 40, 40, 6, player, walls);
+		    monster.add(m);
 		}
 		posx += 40;
 	    }
@@ -105,6 +137,8 @@ public class GameLogic
 	objects = new ArrayList<>(walls);
 	walls.addAll(border);
 	objects.add(player);
+	for (GOMonster m : monster)
+	    objects.add(m);
 	return true;
     }
 
@@ -116,6 +150,8 @@ public class GameLogic
 	renderer.renderObjects(objects);
 	if(spell != null)
 	    renderer.renderSpell(spell);
+	if(ended)
+	    renderer.gameOver();
     }
 
     void getInput()
@@ -138,7 +174,7 @@ public class GameLogic
 	    if (!t1.isAlive())
 	    {
 		//objects.add(new GOTerrain(Mouse.getX(), Display.getHeight() - Mouse.getY(), 10, 10, 3));
-		spell = new GOProjectile(player.getX(), player.getY(), 10, 10, 5, Mouse.getX(), Display.getHeight() -  Mouse.getY(), walls);
+		spell = new GOProjectile(player.getX()+10, player.getY()+10, 10, 10, 5, Mouse.getX(), Display.getHeight() -  Mouse.getY(), walls);
 		t1 = new Thread(new Runnable()
 		{
 
@@ -147,7 +183,7 @@ public class GameLogic
 		    {
 			try
 			{
-			    Thread.sleep(200);
+			    Thread.sleep(2000);
 			} catch (InterruptedException ex)
 			{
 			    Logger.getLogger(GameLogic.class.getName()).log(Level.SEVERE, null, ex);
@@ -157,5 +193,20 @@ public class GameLogic
 		t1.start();
 	    }
 	}
+    }
+
+    boolean isEnded()
+    {
+	if (ended)
+	{
+	    try
+	    {
+		Thread.sleep(2000);
+	    } catch (InterruptedException ex)
+	    {
+		Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+	    }
+	}
+	return ended;
     }
 }

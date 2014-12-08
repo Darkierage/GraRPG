@@ -6,6 +6,7 @@
 package com.rpg.draws;
 
 import com.rpg.game.Game;
+import com.rpg.gameObject.GOMonster;
 import com.rpg.gameObject.GOPlayer;
 import com.rpg.gameObject.GOProjectile;
 import com.rpg.gameObject.GOTerrain;
@@ -38,11 +39,14 @@ public class Render
     Texture grassTex;
     Texture waterTex;
     Texture spellTex;
+    Texture monster1Tex;
     Texture playerFrontTex;
     Texture playerRightTex;
     Texture playerBackTex;
     Texture playerLeftTex;
     Texture treeTex;
+    Texture gameOverTex;
+    Texture bloodTex;
     private boolean flag;
 
     public Render()
@@ -65,6 +69,8 @@ public class Render
 	    {
 		url = new File("GrassBack2.png").toURI().toURL();
 		grassTex = new Texture(url);
+		url = new File("Monster1Front.png").toURI().toURL();
+		monster1Tex = new Texture(url);
 		url = new File("Brick_Wall.png").toURI().toURL();
 		wallTex = new Texture(url);
 		url = new File("Water.png").toURI().toURL();
@@ -81,6 +87,10 @@ public class Render
 		playerBackTex = new Texture(url);
 		url = new File("HeroLeft.png").toURI().toURL();
 		playerLeftTex = new Texture(url);
+		url = new File("GameOver.png").toURI().toURL();
+		gameOverTex = new Texture(url);
+		url = new File("Blood.png").toURI().toURL();
+		bloodTex = new Texture(url);
 	    } catch (MalformedURLException ex)
 	    {
 		Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
@@ -103,8 +113,12 @@ public class Render
 		Draw.rect(t.getX()-25, t.getY()-25, 64, 64, treeTex);
 	    else if (t.getImageCode() == 0)
 		Draw.rect(t.getX(), t.getY(), t.getSx(), t.getSy(), waterTex);
-	    else
+	    else if (t.getImageCode() == 2)
 		renderPlayer((GOPlayer)t);
+	    else if (t.getImageCode() == 7)
+		Draw.rect(t.getSx(), t.getSy(), 40, 40, bloodTex);
+	    else
+		Draw.rect(t.getX(), t.getY(), t.getSx(), t.getSx(), monster1Tex);
 	}
     }
 
@@ -124,6 +138,11 @@ public class Render
     public void renderSpell(GOProjectile spell)
     {
 	Draw.rect(spell.getX(), spell.getY(), spell.getSx(), spell.getSy(), spellTex);
+    }
+
+    public void gameOver()
+    {
+	Draw.rect(100, 100, 1000, 600, gameOverTex);
     }
     
 }

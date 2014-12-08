@@ -65,6 +65,11 @@ public class Map
 			&& pixelColors[i * mapImage.getWidth() + j].getGreen() == 255)
 		{
 		    pixelTable[i][j] = 2;
+		} else if (pixelColors[i * mapImage.getWidth() + j].getRed() == 255
+			&& pixelColors[i * mapImage.getWidth() + j].getBlue() == 255
+			&& pixelColors[i * mapImage.getWidth() + j].getGreen() == 255)
+		{
+		    pixelTable[i][j] = 4;
 		} else if (pixelColors[i * mapImage.getWidth() + j].getRed() == 0
 			&& pixelColors[i * mapImage.getWidth() + j].getBlue() == 255
 			&& pixelColors[i * mapImage.getWidth() + j].getGreen() == 0)

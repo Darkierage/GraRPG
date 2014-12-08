@@ -4,14 +4,7 @@
  */
 package com.rpg.game;
 
-import com.rpg.draws.Draw;
 import com.rpg.draws.Render;
-import com.rpg.draws.Texture;
-import com.rpg.draws.Write;
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.lwjgl.LWJGLException;
@@ -20,7 +13,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.glOrtho;
 
 /**
  * Class resposnible for main loop of game
@@ -96,7 +89,7 @@ public class Game
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
          
-            GL11.glViewport(0,0,1280, 720);
+        GL11.glViewport(0,0,1280, 720);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
  
         GL11.glMatrixMode(GL11.GL_PROJECTION);
@@ -124,6 +117,8 @@ public class Game
 	    game.render();
 	    game.getInput();
 	    Display.update();
+	    if(game.isEnded())
+		break;
 	}
     }
 }
