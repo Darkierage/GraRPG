@@ -102,7 +102,7 @@ public class AccountManagment
             newBufferWritter.newLine();
             newBufferWritter.write(name);
             newBufferWritter.close();          
-        } 
+        } //cos
         catch (IOException ex) 
         {
             Logger.getLogger(AccountManagment.class.getName()).log(Level.SEVERE, null, ex);
