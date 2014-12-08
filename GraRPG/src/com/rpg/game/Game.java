@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
@@ -64,6 +65,7 @@ public class Game
 	    Display.create();
 	    Display.setVSyncEnabled(true);
 	    Keyboard.create();
+	    Mouse.create();
 	} catch (LWJGLException ex)
 	{
 	    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
@@ -111,6 +113,7 @@ public class Game
     {
 	Display.destroy();
 	Keyboard.destroy();
+	Mouse.destroy();
     }
 
     private void mainLoop()
