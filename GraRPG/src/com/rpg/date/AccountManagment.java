@@ -48,7 +48,7 @@ public class AccountManagment
         try 
         {
             PrintWriter newWriter = new PrintWriter("src/com/rpg/date/Accounts/" + userN.getLogin() + ".txt");
-            newWriter.println(userN.getPassword());
+            newWriter.print(userN.getPassword());
             newWriter.close();
         } 
         catch (FileNotFoundException ex) 

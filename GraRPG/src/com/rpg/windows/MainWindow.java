@@ -659,7 +659,7 @@ public class MainWindow extends javax.swing.JFrame {
                 }
                 else
                 {
-                    //newAM = newAMLocal;
+                    newAM = newAMLocal;
                     logingetAccLabel.setText("Logged as: " + loginRegTextField.getText().toString());
                     registerPanel.setVisible(false);
                     accountPanel.setVisible(true);          
