@@ -7,6 +7,7 @@ package com.rpg.draws;
 
 import com.rpg.game.Game;
 import com.rpg.gameObject.GOPlayer;
+import com.rpg.gameObject.GOProjectile;
 import com.rpg.gameObject.GOTerrain;
 import com.rpg.gameObject.GameObject;
 import java.io.File;
@@ -35,10 +36,13 @@ public class Render
 
     Texture wallTex;
     Texture grassTex;
+    Texture waterTex;
+    Texture spellTex;
     Texture playerFrontTex;
     Texture playerRightTex;
     Texture playerBackTex;
     Texture playerLeftTex;
+    Texture treeTex;
     private boolean flag;
 
     public Render()
@@ -59,10 +63,16 @@ public class Render
 	    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	    try
 	    {
-		url = new File("GrassBack.png").toURI().toURL();
+		url = new File("GrassBack2.png").toURI().toURL();
 		grassTex = new Texture(url);
 		url = new File("Brick_Wall.png").toURI().toURL();
 		wallTex = new Texture(url);
+		url = new File("Water.png").toURI().toURL();
+		waterTex = new Texture(url);
+		url = new File("Tree.png").toURI().toURL();
+		treeTex = new Texture(url);
+		url = new File("Fireball.png").toURI().toURL();
+		spellTex = new Texture(url);
 		url = new File("HeroFront.png").toURI().toURL();
 		playerFrontTex = new Texture(url);
 		url = new File("HeroRight.png").toURI().toURL();
@@ -88,11 +98,13 @@ public class Render
 	for(GameObject t : walls)
 	{
 	    if(t.getImageCode() == 1)
-		Draw.rect(t.getX()-2, t.getY()-2, t.getSx()+20, t.getSx()+20, wallTex);
+		Draw.rect(t.getX(), t.getY(), t.getSx()+15, t.getSy()+15, wallTex);
+	    else if (t.getImageCode() == 3)
+		Draw.rect(t.getX()-25, t.getY()-25, 64, 64, treeTex);
+	    else if (t.getImageCode() == 0)
+		Draw.rect(t.getX(), t.getY(), t.getSx(), t.getSy(), waterTex);
 	    else
-	    {
 		renderPlayer((GOPlayer)t);
-	    }
 	}
     }
 
@@ -100,13 +112,18 @@ public class Render
     public void renderPlayer(GOPlayer player)
     {
 	if (player.getDirection() == 1)
-	    Draw.rect(player.getX(), player.getY(), player.getSx()+10, player.getSx()+10, playerFrontTex);
+	    Draw.rect(player.getX(), player.getY(), player.getSx(), player.getSx(), playerFrontTex);
 	else if (player.getDirection() == 2)
-	    Draw.rect(player.getX(), player.getY(), player.getSx()+10, player.getSx()+10, playerRightTex);
+	    Draw.rect(player.getX(), player.getY(), player.getSx(), player.getSx(), playerRightTex);
 	else if (player.getDirection() == 0)
-	    Draw.rect(player.getX(), player.getY(), player.getSx()+10, player.getSx()+10, playerLeftTex);
+	    Draw.rect(player.getX(), player.getY(), player.getSx(), player.getSx(), playerLeftTex);
 	else
-	    Draw.rect(player.getX(), player.getY(), player.getSx()+10, player.getSx()+10, playerBackTex);
+	    Draw.rect(player.getX(), player.getY(), player.getSx(), player.getSx(), playerBackTex);
+    }
+    
+    public void renderSpell(GOProjectile spell)
+    {
+	Draw.rect(spell.getX(), spell.getY(), spell.getSx(), spell.getSy(), spellTex);
     }
     
 }

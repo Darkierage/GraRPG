@@ -38,4 +38,14 @@ public class Collision
         }
         return false;
     }
+    
+    public static boolean checkIntersect(GameObject g1, ArrayList<GameObject> lstGO)
+    {
+        for(GameObject g2 : lstGO)
+        {
+            if(checkIntersection(g1, g2))
+                return true;
+        }
+        return false;
+    }
 }
