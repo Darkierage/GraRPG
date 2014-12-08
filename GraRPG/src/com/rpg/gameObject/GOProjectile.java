@@ -20,6 +20,7 @@ public class GOProjectile extends GameObject
     private float speedY;
     private boolean exists = true;
     ArrayList<GOTerrain> objects;
+    private boolean test;
     
     public GOProjectile(float x, float y, float sx, float sy, int imageCode, float targetX, float targetY, ArrayList<GOTerrain> objects)
     {
