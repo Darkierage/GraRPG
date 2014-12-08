@@ -6,6 +6,11 @@ package com.rpg.windows;
 
 import com.rpg.date.AccountManagment;
 import com.rpg.date.User;
+import com.rpg.game.Game;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -77,11 +82,18 @@ public class MainWindow extends javax.swing.JFrame {
         deleteCharAccButton = new javax.swing.JButton();
         startAccButton = new javax.swing.JButton();
         deleteAccAccButton = new javax.swing.JButton();
+        newCharacterPanel = new javax.swing.JPanel();
+        characterTitleLabel = new javax.swing.JLabel();
+        characterCharacterLabel = new javax.swing.JLabel();
+        newCharacterTextField = new javax.swing.JTextField();
+        acceptCharacterButton = new javax.swing.JButton();
+        cancelNewButton = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
         closeMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        MainPanel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         MainPanel.setMaximumSize(new java.awt.Dimension(0, 0));
         MainPanel.setPreferredSize(new java.awt.Dimension(860, 500));
         MainPanel.setLayout(null);
@@ -277,7 +289,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         acceptLogButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         acceptLogButton.setText("Accept");
-        acceptLogButton.setPreferredSize(new java.awt.Dimension(103, 37));
         acceptLogButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 acceptLogButtonActionPerformed(evt);
@@ -362,7 +373,7 @@ public class MainWindow extends javax.swing.JFrame {
         jList1.setBackground(new java.awt.Color(240, 240, 240));
         jList1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Character 1", "Character 2" };
+            String[] strings = { "<empty slot>", "<empty slot>" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -381,6 +392,7 @@ public class MainWindow extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        jList2.setEnabled(false);
         jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jList2.setFixedCellHeight(50);
         jList2.setFixedCellWidth(20);
@@ -388,82 +400,177 @@ public class MainWindow extends javax.swing.JFrame {
 
         createAccButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         createAccButton.setText("Create New Character");
+        createAccButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createAccButtonActionPerformed(evt);
+            }
+        });
 
         deleteCharAccButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         deleteCharAccButton.setText("Delete Character");
+        deleteCharAccButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteCharAccButtonActionPerformed(evt);
+            }
+        });
 
         startAccButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         startAccButton.setText("Start Game");
+        startAccButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startAccButtonActionPerformed(evt);
+            }
+        });
 
         deleteAccAccButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         deleteAccAccButton.setText("Delete Account");
+        deleteAccAccButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteAccAccButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout accountPanelLayout = new javax.swing.GroupLayout(accountPanel);
         accountPanel.setLayout(accountPanelLayout);
         accountPanelLayout.setHorizontalGroup(
             accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(accountPanelLayout.createSequentialGroup()
-                .addGap(345, 345, 345)
-                .addComponent(accountTitleLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                .addComponent(logingetAccLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(logoutAccButton)
-                .addGap(40, 40, 40))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, accountPanelLayout.createSequentialGroup()
                 .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(accountPanelLayout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(characterAccList, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(lastAccList, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(345, 345, 345)
+                        .addComponent(accountTitleLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(logingetAccLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(accountPanelLayout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addComponent(startAccButton))
-                    .addGroup(accountPanelLayout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(avaibleAccLabel)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(deleteAccAccButton)
-                    .addComponent(createAccButton)
-                    .addComponent(deleteCharAccButton))
-                .addGap(134, 134, 134))
+                        .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(accountPanelLayout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addComponent(characterAccList, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(lastAccList, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(accountPanelLayout.createSequentialGroup()
+                                .addGap(107, 107, 107)
+                                .addComponent(avaibleAccLabel))
+                            .addGroup(accountPanelLayout.createSequentialGroup()
+                                .addGap(117, 117, 117)
+                                .addComponent(startAccButton)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                        .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(deleteAccAccButton)
+                            .addComponent(createAccButton)
+                            .addComponent(deleteCharAccButton))
+                        .addGap(35, 35, 35)))
+                .addComponent(logoutAccButton)
+                .addGap(40, 40, 40))
         );
         accountPanelLayout.setVerticalGroup(
             accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(accountPanelLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(accountPanelLayout.createSequentialGroup()
-                        .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(logingetAccLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(logoutAccButton))
-                            .addComponent(accountTitleLabel))
-                        .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(accountPanelLayout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addComponent(createAccButton)
-                                .addGap(12, 12, 12)
-                                .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(characterAccList, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                                    .addComponent(lastAccList, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                            .addGroup(accountPanelLayout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(avaibleAccLabel))))
-                    .addComponent(deleteCharAccButton))
-                .addGap(83, 83, 83)
                 .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(startAccButton)
-                    .addComponent(deleteAccAccButton))
-                .addContainerGap(89, Short.MAX_VALUE))
+                    .addComponent(logoutAccButton)
+                    .addComponent(accountTitleLabel)
+                    .addComponent(logingetAccLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(accountPanelLayout.createSequentialGroup()
+                            .addGap(55, 55, 55)
+                            .addComponent(createAccButton)
+                            .addGap(12, 12, 12)
+                            .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(characterAccList, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                                .addComponent(lastAccList, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addGroup(accountPanelLayout.createSequentialGroup()
+                            .addGap(40, 40, 40)
+                            .addComponent(avaibleAccLabel)))
+                    .addGroup(accountPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(deleteCharAccButton)))
+                .addGap(83, 83, 83)
+                .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deleteAccAccButton)
+                    .addComponent(startAccButton))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         accountPanel.setVisible(false);
 
         MainPanel.add(accountPanel);
-        accountPanel.setBounds(0, 0, 860, 500);
+        accountPanel.setBounds(0, 0, 860, 499);
+
+        newCharacterPanel.setOpaque(false);
+
+        characterTitleLabel.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        characterTitleLabel.setText("New Character");
+
+        characterCharacterLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        characterCharacterLabel.setText("Character name:");
+
+        newCharacterTextField.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        newCharacterTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newCharacterTextFieldActionPerformed(evt);
+            }
+        });
+
+        acceptCharacterButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        acceptCharacterButton.setText("Accept");
+        acceptCharacterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acceptCharacterButtonActionPerformed(evt);
+            }
+        });
+
+        cancelNewButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cancelNewButton.setText("Cancel");
+        cancelNewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelNewButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout newCharacterPanelLayout = new javax.swing.GroupLayout(newCharacterPanel);
+        newCharacterPanel.setLayout(newCharacterPanelLayout);
+        newCharacterPanelLayout.setHorizontalGroup(
+            newCharacterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newCharacterPanelLayout.createSequentialGroup()
+                .addGap(115, 115, 115)
+                .addComponent(characterCharacterLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
+                .addComponent(newCharacterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newCharacterPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(characterTitleLabel)
+                .addGap(272, 272, 272))
+            .addGroup(newCharacterPanelLayout.createSequentialGroup()
+                .addGap(125, 125, 125)
+                .addComponent(acceptCharacterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cancelNewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(126, 126, 126))
+        );
+        newCharacterPanelLayout.setVerticalGroup(
+            newCharacterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newCharacterPanelLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(characterTitleLabel)
+                .addGap(59, 59, 59)
+                .addGroup(newCharacterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(characterCharacterLabel)
+                    .addComponent(newCharacterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
+                .addGroup(newCharacterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(acceptCharacterButton, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                    .addComponent(cancelNewButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(59, 59, 59))
+        );
+
+        newCharacterPanel.setVisible(false);
+
+        MainPanel.add(newCharacterPanel);
+        newCharacterPanel.setBounds(0, 0, 860, 521);
 
         jMenuBar.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -523,7 +630,9 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_closeMenuMousePressed
 
     private void logoutAccButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutAccButtonActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "You have been logged out!");
+        dispose();
+        MainWindow newMainWindow = new MainWindow();
     }//GEN-LAST:event_logoutAccButtonActionPerformed
 
     private void cancelLogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelLogButtonActionPerformed
@@ -534,30 +643,43 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelLogButtonActionPerformed
 
     private void acceptRegButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptRegButtonActionPerformed
-        if(passwordRegPassField.getText().equals(repassRegPassField.getText()))
-        {       
-            AccountManagment newAMLocal = new AccountManagment(new User(loginRegTextField.getText().toString(), passwordRegPassField.getText().toString()));       
-            if(newAMLocal.RegisterAccount() == false)
-            {
-                JOptionPane.showMessageDialog(null, "Account already exists!");
-                loginRegTextField.setText(null);
-                passwordRegPassField.setText(null);
-                repassRegPassField.setText(null);
+        
+        
+        if(loginRegTextField.getText().toString().length() < 10 && passwordRegPassField.getText().toString().length() > 1 && loginRegTextField.getText().toString().length() > 1)
+        {
+            if(passwordRegPassField.getText().equals(repassRegPassField.getText()))
+            {       
+                AccountManagment newAMLocal = new AccountManagment(new User(loginRegTextField.getText().toString(), passwordRegPassField.getText().toString()));       
+                if(newAMLocal.RegisterAccount() == false)
+                {
+                    JOptionPane.showMessageDialog(null, "Account already exists!");
+                    loginRegTextField.setText(null);
+                    passwordRegPassField.setText(null);
+                    repassRegPassField.setText(null);
+                }
+                else
+                {
+                    //newAM = newAMLocal;
+                    logingetAccLabel.setText("Logged as: " + loginRegTextField.getText().toString());
+                    registerPanel.setVisible(false);
+                    accountPanel.setVisible(true);          
+                }
             }
             else
             {
-                //newAM = newAMLocal;
-                registerPanel.setVisible(false);
-                accountPanel.setVisible(true);          
-            }
+                JOptionPane.showMessageDialog(null, "Passwords are not the same!");
+                loginRegTextField.setText(null);
+                passwordRegPassField.setText(null);
+                repassRegPassField.setText(null);
+            }  
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "Passwords are not the same!");
+            JOptionPane.showMessageDialog(null, "Login must have maximum 10 characters and login/password min 1 character!");
             loginRegTextField.setText(null);
             passwordRegPassField.setText(null);
             repassRegPassField.setText(null);
-        }       
+        }
     }//GEN-LAST:event_acceptRegButtonActionPerformed
 
     private void cancelRegButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelRegButtonActionPerformed
@@ -581,23 +703,116 @@ public class MainWindow extends javax.swing.JFrame {
             newAM = newAMLocal;           
             logPanel.setVisible(false);
             logingetAccLabel.setText("Logged as: " + loginLogTextField.getText().toString());
+            
+            jList1.setModel( new javax.swing.AbstractListModel() {
+            String[] strings = { newAM.getCharacterName(1), newAM.getCharacterName(2) };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }});
+            
             accountPanel.setVisible(true);
             
         }
         
     }//GEN-LAST:event_acceptLogButtonActionPerformed
 
+    private void deleteAccAccButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAccAccButtonActionPerformed
+        newAM.RemoveAccount();
+        JOptionPane.showMessageDialog(null, "Your account has been deleted!");
+        dispose();
+        MainWindow newMainWindow = new MainWindow();
+    }//GEN-LAST:event_deleteAccAccButtonActionPerformed
+
+    private void startAccButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startAccButtonActionPerformed
+        dispose();
+        Game newGame = new Game();
+	newGame.startGame();
+    }//GEN-LAST:event_startAccButtonActionPerformed
+
+    private void createAccButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccButtonActionPerformed
+        accountPanel.setVisible(false);
+        newCharacterPanel.setVisible(true);
+    }//GEN-LAST:event_createAccButtonActionPerformed
+
+    private void newCharacterTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCharacterTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newCharacterTextFieldActionPerformed
+
+    private void acceptCharacterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptCharacterButtonActionPerformed
+        if(newAM.CheckifCharacterPossibility())
+        {
+            if(newCharacterTextField.getText().toString().length() > 1 && newCharacterTextField.getText().toString().length() < 10)
+            {
+                try 
+                {
+                    newAM.CreateCharacter(newCharacterTextField.getText().toString());
+                    JOptionPane.showMessageDialog(null, "Your character has been succesfull added!");
+                    
+                    jList1.setModel( new javax.swing.AbstractListModel() 
+                    {
+                        String[] strings = { newAM.getCharacterName(1), newAM.getCharacterName(2) };
+                        public int getSize() { return strings.length; }
+                        public Object getElementAt(int i) { return strings[i]; }
+                    });
+                    
+                    newCharacterPanel.setVisible(false);
+                    accountPanel.setVisible(true);
+                } 
+                catch (FileNotFoundException ex) 
+                {
+                    Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Your character name must have min 1 character and max 10 characters!");
+            }
+        }
+        else
+            JOptionPane.showMessageDialog(null, "You have already 2 characters!");
+    }//GEN-LAST:event_acceptCharacterButtonActionPerformed
+
+    private void deleteCharAccButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCharAccButtonActionPerformed
+        String temp = (String)jList1.getSelectedValue();
+        if(temp.equals("<empty slot>"))
+        {
+            JOptionPane.showMessageDialog(null, "There is no character on this slot!");
+        }
+        else
+        {              
+            if(jList1.isSelectedIndex(0))
+                newAM.RemoveCharacter(1);
+            if(jList1.isSelectedIndex(1))
+                newAM.RemoveCharacter(2);
+
+            jList1.setModel( new javax.swing.AbstractListModel() {
+                String[] strings = { newAM.getCharacterName(1), newAM.getCharacterName(2) };
+                public int getSize() { return strings.length; }
+                public Object getElementAt(int i) { return strings[i]; }});          
+        }
+        
+    }//GEN-LAST:event_deleteCharAccButtonActionPerformed
+
+    private void cancelNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelNewButtonActionPerformed
+        newCharacterTextField.setText(null);
+        newCharacterPanel.setVisible(false);
+        accountPanel.setVisible(true);
+    }//GEN-LAST:event_cancelNewButtonActionPerformed
+
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MainPanel;
+    private javax.swing.JButton acceptCharacterButton;
     private javax.swing.JButton acceptLogButton;
     private javax.swing.JButton acceptRegButton;
     private javax.swing.JPanel accountPanel;
     private javax.swing.JLabel accountTitleLabel;
     private javax.swing.JLabel avaibleAccLabel;
     private javax.swing.JButton cancelLogButton;
+    private javax.swing.JButton cancelNewButton;
     private javax.swing.JButton cancelRegButton;
     private javax.swing.JScrollPane characterAccList;
+    private javax.swing.JLabel characterCharacterLabel;
+    private javax.swing.JLabel characterTitleLabel;
     private javax.swing.JMenu closeMenu;
     private javax.swing.JButton createAccButton;
     private javax.swing.JButton deleteAccAccButton;
@@ -616,6 +831,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel loginTitleLogLabel;
     private javax.swing.JLabel logingetAccLabel;
     private javax.swing.JButton logoutAccButton;
+    private javax.swing.JPanel newCharacterPanel;
+    private javax.swing.JTextField newCharacterTextField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel passwordLogLabel;
     private javax.swing.JPasswordField passwordLogPassField;

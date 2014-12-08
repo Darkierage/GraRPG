@@ -29,7 +29,7 @@ public class GameLogic
     public GameLogic()
     {
 	Map map = new Map();
-	renderer = new Render();a
+	renderer = new Render();
 	colorCode = map.getColorCodes();
 	walls = new ArrayList<>();
 	createObjects();
