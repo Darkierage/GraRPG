@@ -22,9 +22,9 @@ public class GOTerrain extends GameObject
      * @param sx szerokość obiektu
      * @param sy wysokość obiektu
      */
-    public GOTerrain(boolean canIStandOn, float x, float y, float sx, float sy)
+    public GOTerrain(boolean canIStandOn, float x, float y, float sx, float sy, int imageCode)
     {
-	super(x, y, sx, sy);
+	super(x, y, sx, sy, imageCode);
 	this.canIStandOn = canIStandOn;
     }
     

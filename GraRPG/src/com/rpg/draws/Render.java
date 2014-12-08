@@ -8,6 +8,7 @@ package com.rpg.draws;
 import com.rpg.game.Game;
 import com.rpg.gameObject.GOPlayer;
 import com.rpg.gameObject.GOTerrain;
+import com.rpg.gameObject.GameObject;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -15,6 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import static org.lwjgl.opengl.GL11.GL_BLEND;
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
@@ -44,8 +46,7 @@ public class Render
 	flag = true;
     }
     
-    
-    public void renderTerrain(ArrayList<GOTerrain> terrain)
+    public void renderTerrain()
     {
 	if (flag)
 	{
@@ -58,9 +59,9 @@ public class Render
 	    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	    try
 	    {
-		url = new File("Grass.png").toURI().toURL();
+		url = new File("GrassBack.png").toURI().toURL();
 		grassTex = new Texture(url);
-		url = new File("Wall.png").toURI().toURL();
+		url = new File("Brick_Wall.png").toURI().toURL();
 		wallTex = new Texture(url);
 		url = new File("HeroFront.png").toURI().toURL();
 		playerFrontTex = new Texture(url);
@@ -79,19 +80,22 @@ public class Render
 	    }
 	    flag = false;
 	}
-	for(GOTerrain t : terrain)
+	Draw.rect(0, 0, Display.getWidth(), Display.getHeight(), grassTex);
+    }
+    
+    public void renderObjects(ArrayList<GameObject> walls)
+    {
+	for(GameObject t : walls)
 	{
-	    if(t.CanIStandOn() == true)
-		Draw.rect(t.getX(), t.getY(), t.getSx(), t.getSx(), grassTex);
+	    if(t.getImageCode() == 1)
+		Draw.rect(t.getX()-2, t.getY()-2, t.getSx()+20, t.getSx()+20, wallTex);
 	    else
-		Draw.rect(t.getX(), t.getY(), t.getSx(), t.getSx(), wallTex);
+	    {
+		renderPlayer((GOPlayer)t);
+	    }
 	}
     }
 
-    public void zrobilemFunkcjeBoNieChceMiSieMyslecJakZaladowacObrazki()
-    {
-	
-    }
     
     public void renderPlayer(GOPlayer player)
     {

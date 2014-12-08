@@ -7,8 +7,10 @@ package com.rpg.game;
 import com.rpg.draws.Render;
 import com.rpg.gameObject.GOPlayer;
 import com.rpg.gameObject.GOTerrain;
+import com.rpg.gameObject.GameObject;
 import com.rpg.map.Map;
 import java.util.ArrayList;
+import java.util.Collections;
 import org.lwjgl.input.Keyboard;
 
 /**
@@ -19,17 +21,17 @@ public class GameLogic
 {
 
     private final int[][] colorCode;
-    ArrayList<GOTerrain> terrain;
+    ArrayList<GOTerrain> walls;
+    ArrayList<GameObject> objects;
     GOPlayer player;
     Render renderer;
 
     public GameLogic()
     {
 	Map map = new Map();
-	renderer = new Render();
-	renderer.zrobilemFunkcjeBoNieChceMiSieMyslecJakZaladowacObrazki();
+	renderer = new Render();a
 	colorCode = map.getColorCodes();
-	terrain = new ArrayList<>();
+	walls = new ArrayList<>();
 	createObjects();
     }
 
@@ -50,27 +52,33 @@ public class GameLogic
 	{
 	    for (int j = 0; j < colorCode[i].length; j++)
 	    {
-		if(colorCode[i][j] == 2)
-		    terrain.add(new GOTerrain(true, posx, posy, 40, 40));
-		else if(colorCode[i][j] == 1)
-		    terrain.add(new GOTerrain(false, posx, posy, 40, 40));
+		//if(colorCode[i][j] == 2)
+		    //terrain.add(new GOTerrain(true, posx, posy, 40, 40));
+		if(colorCode[i][j] == 1)
+		    walls.add(new GOTerrain(false, posx, posy, 40, 40, 1));
 		else if(colorCode[i][j] == 3)
 		{
-		    player = new GOPlayer(posx, posy, 40, 40);
-		    terrain.add(new GOTerrain(true, posx, posy, 40, 40));
+		    player = new GOPlayer(posx, posy, 40, 40, walls, 2);
+		    //terrain.add(new GOTerrain(true, posx, posy, 40, 40));
 		}
 		posx += 40;
 	    }
 	    posy +=40;
 	    posx = 0;
 	}
+	objects = new ArrayList<>(walls);
+	objects.add(player);
 	return true;
     }
 
     void render()
     {
-	renderer.renderTerrain(terrain);
-	renderer.renderPlayer(player);
+	renderer.renderTerrain();
+	
+	//renderer.renderPlayer(player);
+	Collections.sort(objects);
+	renderer.renderObjects(objects);
+	//renderer.renderPlayer(player);
     }
 
     void getInput()
