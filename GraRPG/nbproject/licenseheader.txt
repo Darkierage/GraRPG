@@ -1,7 +1,0 @@
-<#if licenseFirst??>
-${licenseFirst}
-</#if>
-${licensePrefix}RPG Game - Software Engineering${licensePrefix}All rights reserved
-${licensePrefix}Konrad Rugala, Krzysztof Sobieraj<#if licenseLast??>
-${licenseLast}
-</#if>
