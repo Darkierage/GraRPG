@@ -1,0 +1,3 @@
+class Postac {
+	void add(){};
+};
