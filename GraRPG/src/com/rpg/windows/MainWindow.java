@@ -10,7 +10,6 @@ import com.rpg.game.Game;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 

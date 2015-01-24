@@ -5,7 +5,6 @@
 
 package com.rpg.main;
 
-import com.rpg.game.Game;
 import com.rpg.windows.MainWindow;
 
 /**

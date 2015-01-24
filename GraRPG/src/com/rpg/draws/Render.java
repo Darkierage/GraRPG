@@ -6,10 +6,8 @@
 package com.rpg.draws;
 
 import com.rpg.game.Game;
-import com.rpg.gameObject.GOMonster;
 import com.rpg.gameObject.GOPlayer;
 import com.rpg.gameObject.GOProjectile;
-import com.rpg.gameObject.GOTerrain;
 import com.rpg.gameObject.GameObject;
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +17,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.GL11;
 import static org.lwjgl.opengl.GL11.GL_BLEND;
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;

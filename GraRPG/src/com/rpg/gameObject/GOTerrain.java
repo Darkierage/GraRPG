@@ -18,6 +18,7 @@ public class GOTerrain extends GameObject
      * @param y współrzędna y lewego dolnego rogu
      * @param sx szerokość obiektu
      * @param sy wysokość obiektu
+     * @param imageCode typ obrazka do wyświetlenia
      */
     public GOTerrain(float x, float y, float sx, float sy, int imageCode)
     {

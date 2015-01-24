@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class GOMonster extends GameObject
 {
     private final GOPlayer player;
-    private float speed = 2;
+    private final float speed = 2;
     private float speedX;
     private float speedY;
     ArrayList<GOTerrain> walls;

@@ -4,7 +4,6 @@
  */
 package com.rpg.game;
 
-import com.rpg.draws.Render;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.lwjgl.LWJGLException;
@@ -13,7 +12,6 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
-import static org.lwjgl.opengl.GL11.glOrtho;
 
 /**
  * Class resposnible for main loop of game
