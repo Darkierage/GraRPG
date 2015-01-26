@@ -31,6 +31,12 @@ public class Collision
         return r1.intersects(r2);
     }
     
+    /**
+     * Pozwala określić czy pojedynczy obiekt koliduje z jakimś obszarem niedozwolonym
+     * @param g1 Obiekt, który może ulec kolizji z terenem
+     * @param lstGO lista obiektów reprezentujących teren
+     * @return true jeśli g1 koliduje z którymkolwiek obiektem z listy
+     */
     public static boolean checkIntersection(GameObject g1, ArrayList<GOTerrain> lstGO)
     {
         for(GameObject g2 : lstGO)
@@ -41,6 +47,12 @@ public class Collision
         return false;
     }
     
+    /**
+     * Pozwala określić czy pojedynczy obiekt koliduje z którymś obiektem z listy
+     * @param g1 Obiekt, który może ulec kolizji z innymi obiektami
+     * @param lstGO lista obiektów do porównania
+     * @return true jeśli g1 koliduje z którymkolwiek obiektem z listy
+     */
     public static boolean checkIntersect(GameObject g1, ArrayList<GameObject> lstGO)
     {
         for(GameObject g2 : lstGO)

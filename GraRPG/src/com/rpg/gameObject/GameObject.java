@@ -18,6 +18,14 @@ public abstract class GameObject implements Comparable<GameObject>
     protected float sy;
     protected int imageCode;
 
+    /**
+     * Konstruktor domyślny.
+     * @param x pozycja na osi OX
+     * @param y pozycja na osi OY
+     * @param sx szerokość obiektu
+     * @param sy wysokość obiektu
+     * @param imageCode kod obrazka do renderingu
+     */
     public GameObject(float x, float y, float sx, float sy, int imageCode)
     {
 	this.x = x;
@@ -27,11 +35,18 @@ public abstract class GameObject implements Comparable<GameObject>
 	this.imageCode = imageCode;
     }
 
+    /**
+     * Zwraca kod obrazka przypisanego do obiektu
+     * @return kod obrazka do renderingu
+     */
     public int getImageCode()
     {
 	return imageCode;
     }
     
+    /**
+     * Aktualizacja stanu obiektu
+     */
     public abstract void update();
 
     /**

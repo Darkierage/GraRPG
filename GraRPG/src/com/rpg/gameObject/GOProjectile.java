@@ -9,7 +9,7 @@ import com.rpg.physics.Collision;
 import java.util.ArrayList;
 
 /**
- *
+ * Reprezentacja pocisków oraz innych przemieszczających się obiektów
  * @author Konrad
  */
 public class GOProjectile extends GameObject
@@ -22,6 +22,17 @@ public class GOProjectile extends GameObject
     ArrayList<GOTerrain> objects;
     private boolean test;
     
+    /**
+     * 
+     * @param x współrzędna x
+     * @param y współrzędna y
+     * @param sx szerokość obiektu
+     * @param sy wysokość obiektu
+     * @param imageCode kod obrazka do renderingu
+     * @param targetX współrzędna x celu, w którym poruszał się będzie pocisk
+     * @param targetY współrzędna y celu, w którym poruszał się będzie pocisk
+     * @param objects lista obiektów, które mogą zatrzymać pocisk
+     */
     public GOProjectile(float x, float y, float sx, float sy, int imageCode, float targetX, float targetY, ArrayList<GOTerrain> objects)
     {
 	super(x, y, sx, sy, imageCode);
@@ -42,6 +53,10 @@ public class GOProjectile extends GameObject
 	    exists = false;
     }
 
+    /**
+     * Sprawdza czy pocisk istnieje
+     * @return false jeśli pocisk w coś trafił
+     */
     public boolean isExists()
     {
 	return exists;

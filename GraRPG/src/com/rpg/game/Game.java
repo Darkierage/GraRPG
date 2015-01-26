@@ -14,7 +14,7 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
 /**
- * Class resposnible for main loop of game
+ * Klasa odpowiedzialna za uruchomienie gry i jej głównej pętli
  *
  * @author Konrad
  */
@@ -98,7 +98,7 @@ public class Game
     }
 
     /**
-     * Sprzątanie
+     * Sprzątanie po urządzeniach wyjścia i wejścia
      */
     private void cleanUp()
     {
@@ -107,6 +107,9 @@ public class Game
 	Mouse.destroy();
     }
 
+    /**
+     * Główna pętla gry
+     */
     private void mainLoop()
     {
 	while (!Display.isCloseRequested())

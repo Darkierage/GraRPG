@@ -26,7 +26,7 @@ import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glEnable;
 
 /**
- *
+ * Wyświetlanie obiektów.
  * @author Konrad
  */
 public class Render
@@ -51,6 +51,9 @@ public class Render
 	flag = true;
     }
     
+    /**
+     * Przypisuje obrazki do obiektów oraz wyświetla obszar gry
+     */
     public void renderTerrain()
     {
 	if (flag)
@@ -100,6 +103,10 @@ public class Render
 	Draw.rect(0, 0, Display.getWidth(), Display.getHeight(), grassTex);
     }
     
+    /**
+     * Wyświetla ściany.
+     * @param walls lista ścian
+     */
     public void renderObjects(ArrayList<GameObject> walls)
     {
 	for(GameObject t : walls)
@@ -119,7 +126,10 @@ public class Render
 	}
     }
 
-    
+    /**
+     * Wyświetlanie gracza wraz z prostą animacją kierunku ruchu.
+     * @param player Obiekt reprezentujący gracza
+     */
     public void renderPlayer(GOPlayer player)
     {
 	if (player.getDirection() == 1)
@@ -132,11 +142,18 @@ public class Render
 	    Draw.rect(player.getX(), player.getY(), player.getSx(), player.getSx(), playerBackTex);
     }
     
+    /**
+     * Wyświetla pocisk wystrzelony przez gracza.
+     * @param spell Obiekt reprezentujący pocisk
+     */
     public void renderSpell(GOProjectile spell)
     {
 	Draw.rect(spell.getX(), spell.getY(), spell.getSx(), spell.getSy(), spellTex);
     }
 
+    /**
+     * Wyświetlenie dużego napisu GAME OVER
+     */
     public void gameOver()
     {
 	Draw.rect(100, 100, 1000, 600, gameOverTex);

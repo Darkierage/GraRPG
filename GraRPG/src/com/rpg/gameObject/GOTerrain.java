@@ -14,8 +14,8 @@ public class GOTerrain extends GameObject
 
     /**
      *
-     * @param x współrzędna x lewego dolnego rogu
-     * @param y współrzędna y lewego dolnego rogu
+     * @param x współrzędna x
+     * @param y współrzędna y
      * @param sx szerokość obiektu
      * @param sy wysokość obiektu
      * @param imageCode typ obrazka do wyświetlenia

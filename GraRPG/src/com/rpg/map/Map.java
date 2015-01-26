@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
- *
+ * Klasa wczytuje mapę gry
  * @author Konrad
  */
 public class Map 
@@ -24,6 +24,9 @@ public class Map
     private int[] pixels;
     private Color[] pixelColors;
 
+    /**
+     * Konstruktor domyślny. Otwiera plik z mapą.
+     */
     public Map()
     {
 	this.MAP = new File("map.bmp");
@@ -36,6 +39,9 @@ public class Map
 	}
     }
 
+    /**
+     * Odczytuje kolejne pixele z pliku mapy, tworząc mape bitową.
+     */
     private void getPixels()
     {
 	pixels = mapImage.getRGB(0, 0, mapImage.getWidth(), mapImage.getHeight(), null, 0, mapImage.getWidth());
@@ -46,7 +52,15 @@ public class Map
 	    pixelColors[i] = c;
 	}
     }
-
+    
+    /**
+     * Zwraca tablicę liczb całkowitych, reprezentujących różne kolory pixeli
+     * 1 - czerwony
+     * 2 - zielony
+     * 3 - niebieski
+     * 4 - biały
+     * @return dwuwymiarowa tablica odpowiadająca kolorom z mapy.
+     */
     public int[][] getColorCodes()
     {
 	this.getPixels();

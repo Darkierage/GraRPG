@@ -21,7 +21,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
 /**
- *
+ * Logika gry.
  * @author Konrad
  */
 public class GameLogic
@@ -38,6 +38,10 @@ public class GameLogic
     ArrayList<GOMonster> monster = new ArrayList<>();
     private boolean ended = false;
 
+    /**
+     * Konstruktor.
+     * Tworzy potrzebne zmienne, wątek oczekiwania oraz uruchamia funkcję tworzącą obiekty gry.
+     */
     public GameLogic()
     {
 	Map map = new Map();
@@ -63,6 +67,9 @@ public class GameLogic
 	});
     }
 
+    /**
+     * Aktualizuje stan obiektów w grze. Przemieszcza, tworzy, niszczy oraz sprawdza kolizje.
+     */
     public void update()
     {
 	if (spell != null)
@@ -99,6 +106,10 @@ public class GameLogic
 	
     }
 
+    /**
+     * Tworzy obiekty na podstawie odczytu z pliku mapy.
+     * @return false jeśli obiekty nie zostały odczytane z mapy.
+     */
     private boolean createObjects()
     {
 	if (colorCode == null)
@@ -142,6 +153,9 @@ public class GameLogic
 	return true;
     }
 
+    /**
+     * Uruchamia funkcje wyświetlające obiekty, należące do klasy Render.
+     */
     void render()
     {
 	renderer.renderTerrain();
@@ -154,6 +168,9 @@ public class GameLogic
 	    renderer.gameOver();
     }
 
+    /**
+     * Pobiera dane wejściowe z myszy i klawiatury.
+     */
     void getInput()
     {
 	if (Keyboard.isKeyDown(Keyboard.KEY_W))
@@ -195,6 +212,10 @@ public class GameLogic
 	}
     }
 
+    /**
+     * Zwraca informacje czy gra została zakończona czy jednak trwa.
+     * @return true jeśli gra została skończona
+     */
     boolean isEnded()
     {
 	if (ended)

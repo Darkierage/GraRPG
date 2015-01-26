@@ -9,7 +9,7 @@ import com.rpg.physics.Collision;
 import java.util.ArrayList;
 
 /**
- *
+ * Klasa reprezentująca przeciwników gracza
  * @author Konrad
  */
 public class GOMonster extends GameObject
@@ -21,11 +21,25 @@ public class GOMonster extends GameObject
     ArrayList<GOTerrain> walls;
     private boolean alive = true;
 
+    /**
+     * Pozwala zmienić stan obiektu na martwy w celu eliminacji z gry
+     * @param alive true jeśli obiekt bierze udział w rozgrywce, false jeśli został zabity.
+     */
     public void setAlive(boolean alive)
     {
 	this.alive = alive;
     }
 
+    /**
+     * 
+     * @param x współrzędna x
+     * @param y współrzędna y
+     * @param sx szerokość obiektu
+     * @param sy wysokość obiektu
+     * @param imageCode kod obrazka do renderingu
+     * @param player obiekt reprezentujący gracza
+     * @param walls lista obiektów terenu
+     */
     public GOMonster(float x, float y, float sx, float sy, int imageCode, GOPlayer player, ArrayList<GOTerrain> walls)
     {
 	super(x, y, sx, sy, imageCode);
@@ -47,12 +61,19 @@ public class GOMonster extends GameObject
 	    moveX();
 	}
     }
-
+    
+    /**
+     * Zwraca stan obiektu
+     * @return true jeśli żywy
+     */
     public boolean isAlive()
     {
 	return alive;
     }
 
+    /**
+     * Przemieszczenie obiektu wzdłuż osi OY
+     */
     private void moveY()
     {
 	if (!Collision.checkIntersection(new GOMonster(x-1, y-1, sx+1, sy+1, 1, player, walls), walls))
@@ -65,6 +86,9 @@ public class GOMonster extends GameObject
 	
     }
 
+    /**
+     * Przemieszczenie obiektu wzdłuż osi OX
+     */
     private void moveX()
     {
 	if (!Collision.checkIntersection(new GOMonster(x-1, y-1, sx+1, sy+1, 1, player, walls), walls))
