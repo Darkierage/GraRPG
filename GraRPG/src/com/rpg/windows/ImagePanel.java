@@ -15,7 +15,6 @@ import javax.swing.JPanel;
  *
  * @author Darkrage
  * Klasa ImagePanel bedaca rozszerzeniem JPanel, dolaczenie mozliwosci ustawienia tla jako obrazka
- * @param img reprezentuje tlo 
  */
 class ImagePanel extends JPanel {
 

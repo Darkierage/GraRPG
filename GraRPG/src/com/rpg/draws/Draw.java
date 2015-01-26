@@ -62,7 +62,6 @@ public class Draw
      * @param y przesunięcie wzdłuż osi Y
      * @param width szerokość prostokąta
      * @param high wysokość prostokąta
-     * @param rotation obrót w stopniach
      * @param tex tekstura obiektu
      */
     public static void rect(float x, float y, float width, float high, Texture tex)
@@ -104,7 +103,6 @@ public class Draw
      * @param y przesunięcie wzdłuż osi Y
      * @param width szerokość prostokąta
      * @param high wysokość prostokąta
-     * @param rotation obrót w stopniach
      * @param tex tekstura obiektu
      */
     public static void rect(float x, float y, float width, float high, String tex)
