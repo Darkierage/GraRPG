@@ -15,12 +15,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Odpowiada za zarządzanie kontami gracza
  * @author Darkrage
- * Obsluga systemu logowania, rejestracji, usunięcia, zmiany hasła uzytkownika
+ * Obsługa systemu logowania, rejestracji, usunięcia, zmiany hasła uzytkownika
  */
 public class AccountManagment 
 {
+ 
     User userN;
         
     public AccountManagment(){}
@@ -29,7 +30,10 @@ public class AccountManagment
     {
         this.userN = u;
     }
-    
+    /**
+     * Tworzenie nowych kont graczy
+     * @return false jeśli udało się założyć nowe konto
+     */
     public boolean RegisterAccount()
     {       
         File newFile = new File("src/com/rpg/date/Accounts/" + userN.getLogin() + ".txt");      
@@ -59,12 +63,19 @@ public class AccountManagment
         return true;
     }
     
+    /**
+     * Usuwanie konta
+     */
+    
     public void RemoveAccount()
     {
         File newFile = new File("src/com/rpg/date/Accounts/" + userN.getLogin() + ".txt");
         newFile.delete();
     }
-    
+    /**
+     * Zalogowanie sie na konto
+     * @return false jeśli udało się zalogować
+     */
     public boolean LogIn()
     {
         File newFile = new File("src/com/rpg/date/Accounts/" + userN.getLogin() + ".txt");
@@ -91,6 +102,12 @@ public class AccountManagment
         return true;
     }
     
+    /**
+     * Tworzenie nowej postaci na koncie
+     * @param name nazwa postaci
+     * @throws FileNotFoundException 
+     */
+    
     public void CreateCharacter(String name) throws FileNotFoundException
     {
         File newFile = new File("src/com/rpg/date/Accounts/" + userN.getLogin() + ".txt");
@@ -109,7 +126,12 @@ public class AccountManagment
         }
         
     }
-       
+    
+    /**
+     * Sprawdzanie czy jest możliwość dodania nowej postaci do konta
+     * @return jeśli false to istnieje możliwość dodania nowej postaci
+     */
+    
     public boolean CheckifCharacterPossibility()
     {      
         File newFile = new File("src/com/rpg/date/Accounts/" + userN.getLogin() + ".txt");
@@ -138,6 +160,12 @@ public class AccountManagment
               
         return true;
     }
+    
+    /**
+     * Uzyskanie informacji na temat nazwy postaci
+     * @param n numer ID postaci, może być 1 albo 2
+     * @return zmienna typu String zawierająca nazwę postaci
+     */
     
     public String getCharacterName(int n)
     {
@@ -195,7 +223,10 @@ public class AccountManagment
         }
         return temp;
     }
-    
+    /**
+     * Usunięcie konkretnej postaci
+     * @param n numer ID postaci, może być 1 albo 2
+     */
     public void RemoveCharacter(int n)
     {
         if(n == 1)

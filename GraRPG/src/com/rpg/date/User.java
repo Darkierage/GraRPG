@@ -5,9 +5,8 @@
 package com.rpg.date;
 
 /**
- *
- * @author Darkrage
  * Klasa reprezentujaca uzytkownika z podstawowymi seterami i geterami
+ * @author Darkrage
  */
 public class User 
 {
@@ -18,22 +17,34 @@ public class User
         this.Login = Login;
         this.Password = Password;
     }    
-    
+    /**
+     * Ustawienie loginu
+     * @param log aktualny login
+     */
     void setLogin(String log)
     {
         this.Login = log;
     }
-    
+    /**
+     * Ustawienie hasła
+     * @param pass aktualne hasło
+     */
     void setPassword(String pass)
     {
         this.Password = pass;
     }
-    
+    /**
+     * Uzyskanie loginu
+     * @return zmienna typu String z loginem
+     */
     String getLogin()
     {      
         return Login;
     }
-    
+    /**
+     * Uzyskanie hasła
+     * @return zmienna typu String z hasłem
+     */
     String getPassword()
     {
         return Password;

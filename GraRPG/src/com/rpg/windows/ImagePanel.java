@@ -12,9 +12,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
- *
- * @author Darkrage
  * Klasa ImagePanel bedaca rozszerzeniem JPanel, dolaczenie mozliwosci ustawienia tla jako obrazka
+ * @author Darkrage
  */
 class ImagePanel extends JPanel {
 
@@ -33,7 +32,10 @@ class ImagePanel extends JPanel {
     setSize(size);
     setLayout(null);
   }
-  //przeladowanie metody paintComponent
+  /**
+   * Przeladowanie metody paintComponent
+   * @param g obiekt klasy Graphics
+   */
   public void paintComponent(Graphics g) {
     g.drawImage(img, 0, 0, null);
   }
