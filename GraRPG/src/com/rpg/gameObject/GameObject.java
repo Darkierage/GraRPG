@@ -11,11 +11,25 @@ package com.rpg.gameObject;
  */
 public abstract class GameObject implements Comparable<GameObject>
 {
-
+    /**
+     * Współrzędna x
+     */
     protected float x;
+    /**
+     * Współrzędna y
+     */
     protected float y;
+    /**
+     * Szerokość obiektu
+     */
     protected float sx;
+    /**
+     * Wysokość obiektu
+     */
     protected float sy;
+    /**
+     * Kod obrazka do wyświetlenia
+     */
     protected int imageCode;
 
     /**

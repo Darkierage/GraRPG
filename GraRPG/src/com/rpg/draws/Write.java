@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 import static org.lwjgl.opengl.GL11.*;
 
 /**
- * Pisanie w openGL
+ * Wypisywanie tekstów przy użyciu biblioteki LWJGL
  *
  * @author Konrad
  */
